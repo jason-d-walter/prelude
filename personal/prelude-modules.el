@@ -59,6 +59,26 @@
 ;; Org-mode helps you keep TODO lists, notes and more.
 (require 'prelude-org)
 
+(prelude-require-packages '(use-package))
+
+(prelude-require-packages '(org-bullets))
+
+
+;;; SCM
+(prelude-require-packages '(p4
+                            git-commit
+                            git-timemachine
+                            magit-find-file
+                            magit-filenotify
+                            editorconfig
+                            ))
+
+;;; Miscellaneous modules
+
+(prelude-require-packages '(ripgrep
+                            multiple-cursors
+                            deadgrep))
+
 ;;; Programming languages support
 ;;
 ;; Modules for a few very common programming languages
@@ -80,13 +100,13 @@
 ;; (require 'prelude-latex)
 (require 'prelude-lisp) ;; Common setup for Lisp-like languages
 (require 'prelude-lsp) ;; Base setup for the Language Server Protocol
-;; (require 'prelude-lua)
+(require 'prelude-lua)
 ;; (require 'prelude-ocaml)
 (require 'prelude-perl)
 (require 'prelude-python)
 ;; (require 'prelude-racket)
 ;; (require 'prelude-ruby)
-(require 'prelude-rust)
+;; (require 'prelude-rust)
 ;; (require 'prelude-scala)
 ;; (require 'prelude-scheme)
 (require 'prelude-shell)

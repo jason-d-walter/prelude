@@ -57,12 +57,15 @@
   (standard-hook)
   (company-mode)
   (subword-mode)
-;;  (yas-minor-mode)
-;;  (lsp)
+  (whitespace-mode)
+  (lsp)
   (flycheck-mode))
 
 (add-hook 'c-mode-hook 'my-c-hook)
 (add-hook 'c++-mode-hook 'my-c-hook)
+
+(add-hook 'c-mode-common-hook (lambda ()
+                                (run-hooks 'my-c-hook)))
 
 (defun python-hook-handler ()
   "My hook handler for python."

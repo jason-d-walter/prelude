@@ -61,12 +61,12 @@ or desktop environments that make heavy use of them."
   :type 'boolean
   :group 'prelude)
 
-(defcustom prelude-whitespace t
+(defcustom prelude-whitespace nil
   "Non-nil values enable Prelude's whitespace visualization."
   :type 'boolean
   :group 'prelude)
 
-(defcustom prelude-clean-whitespace-on-save t
+(defcustom prelude-clean-whitespace-on-save nil
   "Cleanup whitespace from file before it's saved.
 Will only occur if `prelude-whitespace' is also enabled."
   :type 'boolean

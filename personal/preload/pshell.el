@@ -95,9 +95,11 @@
   "Get the tab settings."
   (let ((tab-settings
          (my-pshell-parsed-get-item "TAB_SETTINGS" (my-parse-pshell-info))))
-    (if tab-settings
-        (split-string (car tab-settings) ",")
-      (cons "space" '("4")))))
+    (if (my-is-unreal)
+        (cons "tab" '("4"))
+      (if tab-settings
+          (split-string (car tab-settings) ",")
+        (cons "space" '("4"))))))
 
 (provide 'pshell)
 

@@ -64,7 +64,7 @@
 ;; Modules for a few very common programming languages
 ;; are enabled by default.
 
-(require 'prelude-c)
+;; (require 'prelude-c)
 ;; (require 'prelude-clojure)
 ;; (require 'prelude-coffee)
 ;; (require 'prelude-common-lisp)

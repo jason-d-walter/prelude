@@ -40,8 +40,9 @@
 ;; indentation width -- eg. c-basic-offset: use that to adjust your
 ;; personal indentation width, while maintaining the style (and
 ;; meaning) of any files you load.
-(setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
-(setq-default tab-width 8)            ;; but maintain correct appearance
+
+;; (setq-default indent-tabs-mode nil)   ;; don't use tabs to indent
+;; (setq-default tab-width 8)            ;; but maintain correct appearance
 
 ;; Newline at end of file
 (setq require-final-newline t)
@@ -283,8 +284,9 @@
 ;; automatically indenting yanked text if in programming-modes
 (defun yank-advised-indent-function (beg end)
   "Do indentation, as long as the region isn't too large."
-  (if (<= (- end beg) prelude-yank-indent-threshold)
-      (indent-region beg end nil)))
+;;  (if (<= (- end beg) prelude-yank-indent-threshold)
+      ;;(indent-region beg end nil))
+  )
 
 (defmacro advise-commands (advice-name commands class &rest body)
   "Apply advice named ADVICE-NAME to multiple COMMANDS.
@@ -319,8 +321,10 @@ indent yanked text (with prefix arg don't indent)."
 
 ;; whitespace-mode config
 (require 'whitespace)
-(setq whitespace-line-column 80) ;; limit line length
-(setq whitespace-style '(face tabs empty trailing lines-tail))
+(when prelude-whitespace
+  (setq whitespace-line-column 80) ;; limit line length
+  (setq whitespace-style '(face tabs empty trailing lines-tail))
+  )
 
 ;; saner regex syntax
 (require 're-builder)

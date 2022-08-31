@@ -131,9 +131,14 @@
  ".ushell update check"
     ))
 
+(defvar ushell-build-types
+
+  '( "debug" "development" "release" ) )
+
 (defvar ushell-build-commands
   '( "client" "editor" "game" "misc clangdb" "program" "server"  "target" "xml" ) )
 
+(defvar ushell-default-build-type "development")
 (defvar ushell-default-build-command "editor")
 (defvar ushell-default-run-command "editor")
 
@@ -148,6 +153,15 @@
 (defun ushell-is-ushell ()
   "Return non-nil if we are currently in a ushell session."
   (getenv "flow_sid"))
+
+(defun ushell-set-default-build-type ()
+  "Set the default build type."
+  (interactive)
+  (let ((input-val (ushell-get-build-input "build-type: "
+                                           ushell-build-types
+                                           ushell-default-build-type
+                                           )))
+    (setq ushell-default-build-type input-val)))
 
 (defun ushell-user-error ()
   "Reports error back to user."
@@ -178,6 +192,20 @@
     (display-buffer ushell-buffer)
     (apply #'start-process ushell-buffer ushell-buffer (concat shim-path "/" (car split-args)) (cdr split-args))))
 
+(defun copy-full-path-to-kill-ring ()
+  "Copy buffer's full path to kill ring."
+  (interactive)
+  (when buffer-file-name
+    (kill-new (file-truename buffer-file-name))))
+
+(defun p4-who ()
+  "Run .ushell .p4-who command on the current buffer with line and file."
+  (interactive)
+  (when buffer-file-name
+    (ushell-run-as-process (concat ".p4 who " buffer-file-name " "
+                                   (number-to-string
+                                    (1+ (count-lines 1 (point))))))))
+
 (defun ushell-run-command ()
   "Run any ushell command."
   (interactive)
@@ -199,6 +227,15 @@
                                            )))
     (ushell-save-last-input input-val)
     (setq compile-command (concat ".build " input-val " " (read-string (concat ".build " input-val " "))))
+    (if (ushell-is-ushell)
+        (compile compile-command)
+      (ushell-user-error))))
+
+(defun ushell-build-current-file ()
+  "Build a single file as a non-unity build."
+  (interactive)
+  (when buffer-file-name
+    (setq compile-command (concat ".build editor " ushell-default-build-type " " buffer-file-name))
     (if (ushell-is-ushell)
         (compile compile-command)
       (ushell-user-error))))

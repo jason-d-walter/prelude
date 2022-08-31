@@ -4,3 +4,6 @@
 ;;;
 ;;; Commentary:
 ;;; Code:
+
+(setq exec-path (append exec-path '("C:\\Program Files\\LLVM\\bin")))
+

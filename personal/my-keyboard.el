@@ -6,6 +6,8 @@
 (define-key global-map [(f5)] 'my-compile)
 (define-key global-map [(f7)] 'ushell-run-command)
 
+(global-set-key (kbd "C-<f5>") #'ushell-build-current-file)
+
 (global-set-key (kbd "<f3>") #'projectile-ripgrep)
 (global-set-key (kbd "C-<f3>") #'deadgrep)
 
